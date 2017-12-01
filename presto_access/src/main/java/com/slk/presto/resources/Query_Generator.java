@@ -1,9 +1,13 @@
 package com.slk.presto.resources;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -81,8 +85,59 @@ public class Query_Generator {
 	
 	public String generateQuery(Map<String,List<Map<String,Object>>> requestDS){
 		
+	System.out.println(requestDS);	
+	
+	Set<String> allKeys = requestDS.keySet();
+	List<String> columns = new ArrayList<String>();
+	List<String> from_Clause = new ArrayList<String>();
+	
+Iterator<String> itr = allKeys.iterator();
+
+while (itr.hasNext()){
+	
+	String source = itr.next();
+	
+	List<Map<String, Object>> all_data = requestDS.get(source);
+	
+
+	for(int i =0;i<all_data.size();i++){
 		
-		return null;}
+		Map<String, Object> tab_data = all_data.get(i);
+		
+		
+		
+		from_Clause.add(source+"."+tab_data.get("database")+"."+tab_data.get("table"));
+		
+		columns.addAll((Collection<? extends String>) tab_data.get("columns"));
+		
+		
+	}
+}
+System.out.println("added :"+columns);
+System.out.println("from_Clause :"+from_Clause);
+
+String columns_select="";
+String all_from="";
+for(int i=0;i<columns.size();i++){
+	columns_select+=columns.get(i)+",";
+}
+
+columns_select = columns_select.substring(0,columns_select.length()-1);
+
+
+System.out.println("columns_select :"+columns_select);
+
+for(int i=0;i<from_Clause.size();i++){
+	all_from+=from_Clause.get(i)+",";
+}
+
+all_from = all_from.substring(0,all_from.length()-1);
+
+
+String query = "Select "+columns_select+" from "+all_from+";";
+		return query;
+		
+}
 	
 	
 	
@@ -91,9 +146,7 @@ public class Query_Generator {
 		JSONObject request = new JSONObject("{\"selected_columns\":[{\"source\":\"hive\",\"selected_values\":[{\"database\":\"customer_complaints\",\"table\":\"complaints\",\"columns\":[\"Date received\",\"Complaint ID\",\"Account ID\",\"Product\",\"Sub-product\",\"Issue\",\"Sub-issue\",\"Consumer complaint narrative\",\"Company public response\",\"Company\",\"State\",\"ZIP code\",\"Tags\",\"Consumer consent provided?\",\"Submitted via\",\"Date sent to company\",\"Company response to consumer\",\"Timely response?\",\"Consumer disputed?\"]}]},{\"source\":\"cassandra\",\"selected_values\":[{\"database\":\"transactions\",\"table\":\"account_transactions  \",\"columns\":[\"trans_id\",\"account_id\",\"Transaction_date\",\"Type\",\"Operation\",\"Amount\",\"Balance\",\"k_symbol\",\"bank\",\"account\"]}]}]}");
 		
 		Query_Generator qs = new Query_Generator(request);
-		qs.parser();
-		
-		System.out.println(request);
+	System.out.println("Query :"+	qs.generateQuery(qs.parser()));
 
 	}
 
