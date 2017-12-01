@@ -77,7 +77,8 @@ public class FraudRing_Calculation {
 
 	
 	public static void main(String[] args) {
-		
+		FraudRing_Calculation fc = new FraudRing_Calculation();
+		System.out.println(fc.getAllFraudRings().get(0).getRing_size());
 
 	}
 

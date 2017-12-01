@@ -1,0 +1,4 @@
+2017-08-30 17:35:06 INFO  FraudRing_Calculation:38 - Getting Fraud Rings
+2017-08-30 17:35:08 INFO  FraudRing_Calculation:66 - Fraud Rings[com.slk.Neo.FraudRing.Model.FraudRingModel@9a7504c, com.slk.Neo.FraudRing.Model.FraudRingModel@2c039ac6, com.slk.Neo.FraudRing.Model.FraudRingModel@587d1d39]
+2017-08-30 17:35:32 INFO  FraudRing_Calculation:38 - Getting Fraud Rings
+2017-08-30 17:35:33 INFO  FraudRing_Calculation:66 - Fraud Rings[com.slk.Neo.FraudRing.Model.FraudRingModel@9a7504c, com.slk.Neo.FraudRing.Model.FraudRingModel@2c039ac6, com.slk.Neo.FraudRing.Model.FraudRingModel@587d1d39]
