@@ -14,7 +14,20 @@ public class Execute_Query {
 	
 	public void Execute_Query(String query){
 		
+		Connection connection;
+		Statement stmt;
 		
+		
+		try {
+			connection = DriverManager.getConnection("jdbc:presto://10.41.2.16:9080/","test","");
+		  
+		 stmt = connection.createStatement();
+		 ResultSet rs = stmt.executeQuery(query);
+		 
+	
+		}catch (Exception e){
+			
+		}
 		
 	}
 

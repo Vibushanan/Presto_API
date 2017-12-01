@@ -3,6 +3,7 @@ package com.slk.presto;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.slk.presto.resources.Data_Grabber;
+import com.slk.presto.resources.Query_Generator;
 
 /**
  * Servlet implementation class Query
@@ -53,9 +55,12 @@ public class Query extends HttpServlet {
 		
 	    JSONObject jsonObj = new JSONObject(stringBuilder.toString());
 	    
-	    Data_Grabber dg = new Data_Grabber(jsonObj);
-	   
-		doGet(request, response);
+	    Query_Generator qs = new Query_Generator(jsonObj);
+		System.out.println("Query :"+	qs.generateQuery(qs.parser()));
+		PrintWriter out = response.getWriter();
+		
+		out.write(qs.generateQuery(qs.parser()));
+		
 	
 	}
 

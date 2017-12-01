@@ -17,7 +17,7 @@ public class Query_Generator {
 	
 	JSONObject request ;
 
-	Query_Generator(JSONObject data){
+	public Query_Generator(JSONObject data){
 		
 		request = data;
 	}
