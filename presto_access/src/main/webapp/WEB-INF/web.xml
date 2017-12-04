@@ -16,6 +16,12 @@
   	<description></description>
   	<servlet-class>com.slk.presto.Query</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>Executor</servlet-name>
+  	<display-name>Executor</display-name>
+  	<description></description>
+  	<servlet-class>com.slk.presto.Executor</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Data</servlet-name>
   	<url-pattern>/Data</url-pattern>
@@ -23,5 +29,9 @@
   <servlet-mapping>
   	<servlet-name>Query</servlet-name>
   	<url-pattern>/Query</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Executor</servlet-name>
+  	<url-pattern>/Executor</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -59,12 +59,12 @@ public class Query_Generator {
 
 				for (int z = 0; z < col_Array.length(); z++) {
 
-					all_columns_list.add(col_Array.getString(z));
+					all_columns_list.add(source_name.toLowerCase()+"."+col_Array.getString(z));
 				}
 
 				data_Map.put("database", inn_data.get("database"));
 
-				data_Map.put("table", inn_data.get("table"));
+				data_Map.put("table", inn_data.get("table")+" "+source_name.toLowerCase());
 
 				data_Map.put("columns", all_columns_list);
 
@@ -85,11 +85,12 @@ public class Query_Generator {
 	
 	public String generateQuery(Map<String,List<Map<String,Object>>> requestDS){
 		
-	System.out.println(requestDS);	
+	System.out.println("Data Structure :"+requestDS);	
 	
 	Set<String> allKeys = requestDS.keySet();
 	List<String> columns = new ArrayList<String>();
 	List<String> from_Clause = new ArrayList<String>();
+	
 	
 Iterator<String> itr = allKeys.iterator();
 
@@ -97,22 +98,25 @@ while (itr.hasNext()){
 	
 	String source = itr.next();
 	
+	System.out.println("Source : "+source);
+	
 	List<Map<String, Object>> all_data = requestDS.get(source);
 	
 
 	for(int i =0;i<all_data.size();i++){
 		
 		Map<String, Object> tab_data = all_data.get(i);
-		
-		
+
 		
 		from_Clause.add(source+"."+tab_data.get("database")+"."+tab_data.get("table"));
 		
 		columns.addAll((Collection<? extends String>) tab_data.get("columns"));
-		
+	
 		
 	}
 }
+
+
 System.out.println("added :"+columns);
 System.out.println("from_Clause :"+from_Clause);
 
